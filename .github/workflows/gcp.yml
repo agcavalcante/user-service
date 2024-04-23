@@ -63,7 +63,7 @@ jobs:
 
       - name: Build image
         run: docker build . --file ./ --tag us-central1-docker.pkg.dev/tensile-courier-421213/test/
-        working-directory: WORKING_DIRECTORY
+        working-directory: ./
 
       - name: Push image
         run: docker push us-central1-docker.pkg.dev/tensile-courier-421213/test/
