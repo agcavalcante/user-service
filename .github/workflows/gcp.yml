@@ -49,9 +49,9 @@ jobs:
       - name: Build with Gradle
         run: ./gradlew clean build
 
-      # build image
-      - name: Build Docker image
-        run: docker build -t $IMAGE_NAME .
+      # # build image
+      # - name: Build Docker image
+      #   run: docker build -t $IMAGE_NAME .
 
       # # push image to registry
       # - name: Push Docker image
