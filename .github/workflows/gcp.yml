@@ -23,7 +23,7 @@ jobs:
       - id: "auth"
         uses: "google-github-actions/auth@v1"
         with:
-            credentials_json: "${{ secrets.GCP_CREDENTIAL_UPDATED }}"
+            credentials_json: ${{ secrets.GCP_CREDENTIAL_UPDATED }}
 
       - name: "Set up Cloud SDK"
         uses: "google-github-actions/setup-gcloud@v1"
