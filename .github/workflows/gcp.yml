@@ -26,10 +26,10 @@ jobs:
       - name: Configure Docker
         run: gcloud auth configure-docker --quiet
 
-      - name: Configure JAVA
-      - uses: actions/setup-java@v4
+      # Setup JAVA
+      - uses: actions/setup-java@v4.2.1
         with:
-          distribution: 'corretto' # See 'Supported distributions' for available options
+          distribution: 'corretto'
           java-version: '17.0.1'
 
       # gradle clean build
