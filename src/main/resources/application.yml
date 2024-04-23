@@ -1,0 +1,20 @@
+server:
+  port: 8081
+spring:
+  data:
+    mongodb:
+      database: merchants
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: https://dev-38ii0jjjgq7oenfs.us.auth0.com/
+okta:
+  oauth2:
+    audience: http://localhost:8081/
+    issuer: https://dev-38ii0jjjgq7oenfs.us.auth0.com/
+
+logging:
+  level:
+    org.springframework.web: INFO
+    org.springframework.security: DEBUG
