@@ -30,7 +30,7 @@ jobs:
       - uses: actions/setup-java@v4.2.1
         with:
           distribution: 'corretto'
-          java-version: '17.0.1'
+          java-version: '17.0.'
 
       # gradle clean build
       - name: Setup Gradle
