@@ -38,7 +38,7 @@ jobs:
       - name: Make gradlew executable
         run: chmod +x ./gradlew
       - name: Build with Gradle
-        run: ./gradlew build
+        run: ./gradlew clean build
 
       # build image
       - name: Build Docker image
