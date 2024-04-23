@@ -61,7 +61,7 @@ jobs:
         run: |-
           gcloud auth configure-docker us-central1-docker.pkg.dev --quiet
       - name: Build image
-        run: docker build . --file ./ --tag us-central1-docker.pkg.dev/tensile-courier-421213/test
+        run: docker build . --tag us-central1-docker.pkg.dev/tensile-courier-421213/test
         working-directory: ./
 
       - name: Push image
