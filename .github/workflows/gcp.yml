@@ -26,6 +26,20 @@ jobs:
       - name: Configure Docker
         run: gcloud auth configure-docker --quiet
 
+      # Setup JAVA
+      - uses: actions/setup-java@v4.2.1
+        with:
+          distribution: 'corretto'
+          java-version: '17'
+
+      # gradle clean build
+      - name: Setup Gradle
+        uses: gradle/gradle-build-action@v3
+      - name: Make gradlew executable
+        run: chmod +x ./gradlew
+      - name: Build with Gradle
+        run: ./gradlew build
+
       # build image
       - name: Build Docker image
         run: docker build -t $IMAGE_NAME .
@@ -36,4 +50,4 @@ jobs:
 
       # deploy image
       - name: Deploy Docker image
-        run: gcloud run deploy site --image $IMAGE_NAME --region us-central1 --memory 128Mi --min-instances 0 --max-instances 1 --platform managed --port 8080 --allow-unauthenticated
+        run: gcloud run deploy site --image $IMAGE_NAME --region us-central1 --memory 512Mi --min-instances 0 --max-instances 1 --platform managed --port 8080 --allow-unauthenticated
