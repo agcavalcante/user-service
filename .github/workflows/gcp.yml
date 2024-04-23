@@ -65,4 +65,4 @@ jobs:
         run: docker build . --tag us-central1-docker.pkg.dev/tensile-courier-421213/test
 
       - name: Push image
-        run: docker push us-central1-docker.pkg.dev/tensile-courier-421213/test/
+        run: docker push us-central1-docker.pkg.dev/tensile-courier-421213/test
