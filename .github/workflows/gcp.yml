@@ -8,23 +8,32 @@ jobs:
   deploy:
     name: Setup Gcloud Account
     runs-on: ubuntu-latest
-    environment: hw-prod
-    env:
-      IMAGE_NAME: gcr.io/${{ secrets.GCP_PROJECT_ID }}/site:latest
     steps:
+    
       # Git checkout
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
-      # Login to GCP
-      - uses: google-github-actions/setup-gcloud@v0.2.0
+      # # Login to GCP
+      # - uses: google-github-actions/setup-gcloud@v0.2.0
+      #   with:
+      #     service_account_key: ${{ secrets.GCP_CREDENTIAL_UPDATED }}
+      #     project_id: ${{ secrets.GCP_PROJECT_ID }}
+
+      - id: "auth"
+        uses: "google-github-actions/auth@v1"
         with:
-          service_account_key: ${{ secrets.GCP_CREDENTIAL_UPDATED }}
-          project_id: ${{ secrets.GCP_PROJECT_ID }}
+            credentials_json: "${{ secrets.GCP_CREDENTIAL_UPDATED }}"
 
-      # gcloud configure docker
-      - name: Configure Docker
-        run: gcloud auth configure-docker --quiet
+      - name: "Set up Cloud SDK"
+        uses: "google-github-actions/setup-gcloud@v1"
+
+      # # gcloud configure docker
+      # - name: Configure Docker
+      #   run: gcloud auth configure-docker --quiet
+
+      - name: "Use gcloud CLI"
+        run: "gcloud info"
 
       # Setup JAVA
       - uses: actions/setup-java@v4.2.1
@@ -44,6 +53,17 @@ jobs:
       - name: Build Docker image
         run: docker build -t $IMAGE_NAME .
 
-      # push image to registry
-      - name: Push Docker image
-        run: docker push $IMAGE_NAME
+      # # push image to registry
+      # - name: Push Docker image
+      #   run: docker push $IMAGE_NAME
+
+      - name: "Docker auth"
+        run: |-
+          gcloud auth configure-docker us-central1-docker.pkg.dev --quiet
+
+      - name: Build image
+        run: docker build . --file DOCKERFILE_LOCATION --tag us-central1-docker.pkg.dev/tensile-courier-421213/test/
+        working-directory: WORKING_DIRECTORY
+
+      - name: Push image
+        run: docker push us-central1-docker.pkg.dev/tensile-courier-421213/test/
