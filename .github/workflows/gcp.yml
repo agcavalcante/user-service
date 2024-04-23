@@ -14,23 +14,19 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      # Login to GCP
-      - uses: google-github-actions/setup-gcloud@v0.2.0
-        with:
-          service_account_key: ${{ secrets.GCP_CREDENTIAL_UPDATED }}
-          project_id: ${{ secrets.GCP_PROJECT_ID }}
+      # # Login to GCP
+      # - uses: google-github-actions/setup-gcloud@v0.2.0
+      #   with:
+      #     service_account_key: ${{ secrets.GCP_CREDENTIAL_UPDATED }}
+      #     project_id: ${{ secrets.GCP_PROJECT_ID }}
 
       - id: "auth"
         uses: "google-github-actions/auth@v1"
         with:
-            credentials_json: ${{ secrets.GCP_CREDENTIAL_UPDATED }}
+          credentials_json: "${{ secrets.GCP_CREDENTIAL_UPDATED }}"
 
       - name: "Set up Cloud SDK"
         uses: "google-github-actions/setup-gcloud@v1"
-
-      # # gcloud configure docker
-      # - name: Configure Docker
-      #   run: gcloud auth configure-docker --quiet
 
       - name: "Use gcloud CLI"
         run: "gcloud info"
