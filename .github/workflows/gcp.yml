@@ -26,6 +26,10 @@ jobs:
       - name: Configure Docker
         run: gcloud auth configure-docker --quiet
 
+      # gradle clean build
+      - name: Build With Gradle
+        uses: gradle/actions@v3.3.1
+
       # build image
       - name: Build Docker image
         run: docker build -t $IMAGE_NAME .
