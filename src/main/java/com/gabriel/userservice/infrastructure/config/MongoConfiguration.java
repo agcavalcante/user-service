@@ -9,6 +9,4 @@ import org.springframework.data.mongodb.config.EnableReactiveMongoAuditing;
 @EnableReactiveMongoAuditing
 @Log4j2
 public class MongoConfiguration {
-
-
 }
