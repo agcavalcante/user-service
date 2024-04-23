@@ -20,10 +20,10 @@ jobs:
           service_account_key: ${{ secrets.GCP_CREDENTIAL_UPDATED }}
           project_id: ${{ secrets.GCP_PROJECT_ID }}
 
-      # - id: "auth"
-      #   uses: "google-github-actions/auth@v1"
-      #   with:
-      #       credentials_json: ${{ secrets.GCP_CREDENTIAL_UPDATED }}
+      - id: "auth"
+        uses: "google-github-actions/auth@v1"
+        with:
+            credentials_json: ${{ secrets.GCP_CREDENTIAL_UPDATED }}
 
       - name: "Set up Cloud SDK"
         uses: "google-github-actions/setup-gcloud@v1"
