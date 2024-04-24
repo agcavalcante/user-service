@@ -28,6 +28,10 @@ jobs:
       - name: Build with Gradle
         run: ./gradlew clean build
 
+      - uses: Klemensas/action-autotag@stable
+        with:
+          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+
       - uses: thecodemonkey/action-get-gradle-version@master     # <- USE THIS ACTION TO READ THE VERSION FROM BUILD.GRADLE
         id: version                                              # <- give this step an id to access the output of the step
       - run: 'echo version ${{ steps.version.outputs.version }}'
