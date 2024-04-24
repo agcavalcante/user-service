@@ -24,9 +24,6 @@ import static org.springframework.security.config.Customizer.withDefaults;
 @EnableAutoConfiguration(exclude={MongoAutoConfiguration.class})
 public class SecurityConfig {
 
-    @Value("${spring.security.oauth2.resourceserver.jwt.issuer-uri}")
-    private String issuerUri;
-
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
