@@ -52,5 +52,5 @@ jobs:
         run: |
           gcloud auth configure-docker us-central1-docker.pkg.dev --quiet
           docker build -t us-central1-docker.pkg.dev/tensile-courier-421213/test/nginx:latest .
-          gcloud config set account ACCOUNT
+          gcloud auth login
           docker push us-central1-docker.pkg.dev/tensile-courier-421213/test/nginx:latest
