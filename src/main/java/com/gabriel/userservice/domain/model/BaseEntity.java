@@ -16,4 +16,5 @@ public class BaseEntity {
     private Instant createdAt;
     private Instant updatedAt;
     protected Long version;
+
 }

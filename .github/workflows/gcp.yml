@@ -28,6 +28,10 @@ jobs:
       - name: Build with Gradle
         run: ./gradlew clean build
 
+      - uses: thecodemonkey/action-get-gradle-version@master     # <- USE THIS ACTION TO READ THE VERSION FROM BUILD.GRADLE
+        id: version                                              # <- give this step an id to access the output of the step
+      - run: 'echo version ${{ steps.version.outputs.version }}'
+
       - id: auth
         name: Authenticate to GCP
         uses: google-github-actions/auth@v0.4.0
