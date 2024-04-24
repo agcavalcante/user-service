@@ -40,12 +40,12 @@ jobs:
       - name: Configure Docker Client
         run: |-
           gcloud auth configure-docker --quiet
-          gcloud auth configure-docker us-central1-docker.pkg.dev --quiet
 
       - name: build and push the docker image
         env:
           GOOGLE_PROJECT: ${{ secrets.GCP_PROJECT_ID }}
         run: |
-          gcloud auth configure-docker us-central1-docker.pkg.dev
+          gcloud auth configure-docker us-central1-docker.pkg.dev --quiet
           docker build -t us-central1-docker.pkg.dev/tensile-courier-421213/test/nginx:latest .
+          gcloud auth print-access-token | docker login -u oauth2accesstoken --password-stdin https://us-central1-docker.pkg.dev
           docker push us-central1-docker.pkg.dev/tensile-courier-421213/test/nginx:latest
