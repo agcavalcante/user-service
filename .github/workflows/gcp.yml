@@ -58,5 +58,5 @@ jobs:
         run: |-
           gcloud auth login --brief --cred-file="${{ steps.auth.outputs.credentials_file_path }}"
           gcloud auth configure-docker us-central1-docker.pkg.dev --quiet
-          docker build -t us-central1-docker.pkg.dev/tensile-courier-421213/user-service/user-service:latest .
-          docker push us-central1-docker.pkg.dev/tensile-courier-421213/user-service/user-service:latest
+          docker build -t us-central1-docker.pkg.dev/tensile-courier-421213/user-service/user-service .
+          docker push us-central1-docker.pkg.dev/tensile-courier-421213/user-service/user-service
