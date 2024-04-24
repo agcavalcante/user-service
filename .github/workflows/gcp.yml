@@ -49,9 +49,14 @@ jobs:
 #        run: gcloud compute instances list --zones us-central1-a
 
       - id: gcloud
+        name: Repository Creation
+        run: |-
+          gcloud artifacts repositories create user-service --repository-format=docker --location=us-central1 --description="Application repository" --immutable-tags --async
+
+      - id: gcloud
         name: Deploy to Artifact Registry
         run: |-
           gcloud auth login --brief --cred-file="${{ steps.auth.outputs.credentials_file_path }}"
           gcloud auth configure-docker us-central1-docker.pkg.dev --quiet
-          docker build -t us-central1-docker.pkg.dev/tensile-courier-421213/test/user-service:latest .
-          docker push us-central1-docker.pkg.dev/tensile-courier-421213/test/user-service:latest
+          docker build -t us-central1-docker.pkg.dev/tensile-courier-421213/user-service/user-service:latest .
+          docker push us-central1-docker.pkg.dev/tensile-courier-421213/user-service/user-service:latest
