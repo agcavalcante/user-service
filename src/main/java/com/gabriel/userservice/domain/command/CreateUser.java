@@ -9,6 +9,7 @@ public record CreateUser(
         UserStatus status
 ) {
 
+
     public enum UserStatus {
         ACTIVE,
         DISABLED
