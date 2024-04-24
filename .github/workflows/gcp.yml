@@ -48,7 +48,7 @@ jobs:
 #      - name: Run gcloud
 #        run: gcloud compute instances list --zones us-central1-a
 
-      - id: gcloud
+      - id: gclouds
         name: Repository Creation
         run: |-
           gcloud artifacts repositories create user-service --repository-format=docker --location=us-central1 --description="Application repository" --immutable-tags --async
