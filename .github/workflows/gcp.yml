@@ -43,14 +43,14 @@ jobs:
       - name: Set up Cloud SDK
         uses: google-github-actions/setup-gcloud@v0.3.0
 
-      - name: set credential_file
+      - name: Set credential_file
         run: gcloud auth login --cred-file=${{steps.auth.outputs.credentials_file_path}}
 
       - name: Run gcloud
-        run: gcloud compute instances list --zones us-central1
+        run: gcloud compute instances list --zones us-central1-a
 
       - id: gcloud
-        name: gcloud
+        name: Deploy to Artifact Registry
         run: |-
           gcloud auth login --brief --cred-file="${{ steps.auth.outputs.credentials_file_path }}"
           gcloud auth configure-docker us-central1-docker.pkg.dev --quiet
