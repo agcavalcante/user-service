@@ -37,6 +37,11 @@ jobs:
           workload_identity_provider: '/projects/90412647156/locations/global/workloadIdentityPools/github/providers/github-github'
           service_account: 'service-90412647156@gcp-sa-artifactregistry.iam.gserviceaccount.com'
 
+      - name: Configure Docker Client
+        run: |-
+          gcloud auth configure-docker --quiet
+          gcloud auth configure-docker us-central1-docker.pkg.dev --quiet
+
       - name: build and push the docker image
         env:
           GOOGLE_PROJECT: ${{ secrets.GCP_PROJECT_ID }}
