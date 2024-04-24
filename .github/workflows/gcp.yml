@@ -29,16 +29,28 @@ jobs:
       - name: Build with Gradle
         run: ./gradlew clean build
 
-      - id: 'auth'
-        name: 'Authenticate to GCP'
-        uses: 'google-github-actions/auth@v0.3.1'
+      - id: auth
+        name: Authenticate to GCP
+        uses: google-github-actions/auth@v0.4.0
         with:
-          create_credentials_file: 'true'
+          token_format: "access_token"
+          create_credentials_file: true
+          activate_credentials_file: true
           workload_identity_provider: 'projects/90412647156/locations/global/workloadIdentityPools/github-wif-pool/providers/githubwif'
           service_account: 'test-wif@tensile-courier-421213.iam.gserviceaccount.com'
+          access_token_lifetime: '100s'
 
-      - id: 'gcloud'
-        name: 'gcloud'
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v0.3.0
+
+      - name: set credential_file
+        run: gcloud auth login --cred-file=${{steps.auth.outputs.credentials_file_path}}
+
+      - name: Run gcloud
+        run: gcloud compute instances list --zones us-central1
+
+      - id: gcloud
+        name: gcloud
         run: |-
           gcloud auth login --brief --cred-file="${{ steps.auth.outputs.credentials_file_path }}"
           gcloud auth configure-docker us-central1-docker.pkg.dev --quiet
