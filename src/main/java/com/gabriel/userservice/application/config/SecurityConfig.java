@@ -37,6 +37,7 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.POST, "/private/user").hasAuthority("SCOPE_write:users")
                         .requestMatchers(HttpMethod.DELETE, "/private/user/{id}").hasAuthority("SCOPE_write:users")
                         .requestMatchers(HttpMethod.GET, "/private/user/{id}").hasAuthority("SCOPE_read:users")
+                        .requestMatchers(HttpMethod.GET, "/home").authenticated()
                 )
                 .cors(withDefaults())
                 .oauth2ResourceServer(oauth2 -> oauth2
